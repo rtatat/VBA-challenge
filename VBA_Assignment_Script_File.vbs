@@ -1,7 +1,8 @@
 Sub Ticker()
+'This code will filter through the entire list of tickers and return only the unique ones into another column
    'Making sure the code will work in all worksheets
    For Each ws In Worksheets
-   'Getting the Ticker column to return unique entries
+   'Getting the ticker column to return unique entries
     Dim Ticker As Range
     Set Ticker = ws.Range(ws.Range("A1"), ws.Range("A1").End(xlDown))
     Ticker.AdvancedFilter xlFilterCopy, , ws.Range("J1"), True
@@ -11,7 +12,8 @@ Sub Ticker()
 End Sub
 
 Sub YearlyChange()
-    Defining variables
+'This code will determine the change that each ticker has gone through in each year and place them into a new column
+   'Defining variables
    Dim UniTicker As Range
    Set UniTicker = Range(Range("J2"), Range("J2").End(xlDown))
    Dim i As Object
@@ -39,7 +41,7 @@ Sub YearlyChange()
                 k = ws.Range("J:J").Find(what:=i, after:=ws.Range("J1")).Row
                 'Finding the yearly change and placing it into the cell
                 ws.Cells(k, 11) = EndValue - StartValue
-                'Cell formatting
+                'Formatting the cells to be filled in either green or red depending on if there was a positive or negative yearly change
                 If ws.Cells(k, 11) >= 0 Then
                     ws.Cells(k, 11).Interior.ColorIndex = 4
                 ElseIf ws.Cells(k, 11) < 0 Then
@@ -52,6 +54,7 @@ Sub YearlyChange()
 End Sub
 
 Sub PercentChange()
+'This code will determine the yearly change as a percentage based on how much the yearly change was compared to the opening value, and place these calculated values into a new column
     'Defining variables
     Dim UniTicker As Range
     Set UniTicker = Range(Range("J2"), Range("J2").End(xlDown))
@@ -82,6 +85,7 @@ Sub PercentChange()
 End Sub
 
 Sub TotalVolume()
+'This code will sum up the total volume of each unique ticker and place them into a new column
     'Defining variables
     Dim UniTicker As Range
     Set UniTicker = Range(Range("J2"), Range("J2").End(xlDown))
@@ -112,6 +116,7 @@ Sub TotalVolume()
 End Sub
 
 Sub Greatest()
+'This code will sift through the columns with the collated, programmed data and find the greatest percentage values and total volume in the entire year, along with their associated ticker code
     'Making sure the code will work in all worksheets
     For Each ws In Worksheets
         'Cell names
